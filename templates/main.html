@@ -1,0 +1,39 @@
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        background-color: #212121;
+        font-family: sans-serif;
+    }
+    ::-webkit-scrollbar {
+        width: 10px; 
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #494949;
+        border-radius: 50px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #909090; 
+    }
+    
+</style>
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>English to Spanish Translator</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+    </head>
+    <body>
+        {% block content %}
+
+
+        {% endblock %}
+    </body>
+</html>

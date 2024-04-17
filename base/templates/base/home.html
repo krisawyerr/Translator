@@ -1,0 +1,125 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% block content %}
+<style>
+    .searchBarInput {
+        border: none;
+        width: 700px;
+        height: 29px;
+        margin: 14px;
+        background-color: #212121;
+        color: white;
+    }
+    .searchBarInput::placeholder {
+        font-weight: 700;
+    }
+    .searchBarButton {
+        margin: 11px 14px 11px 0px;
+        padding: 0;
+        width: 35px;
+        height: 35px;
+        background-color: #383838;
+        border-radius: 10px;
+        border: none;
+    }
+    .searchBarButton img {
+        width: 20px;
+        height: 20px;
+    }
+    .searchBarInput:focus {
+        outline: none;
+    }
+    .searchBar {
+        border: 1px solid #424242;
+        width: min-content;
+        display: flex;
+        border-radius: 10px;
+        margin: auto;
+        margin-bottom: 30px;
+    }
+    .searchBarLeft {
+        display: flex;
+    }
+    .oneTranslation {
+        display: flex;
+    }
+    .oneTranslation:nth-child(odd) {
+        justify-content: end;
+    }
+    .translations {
+        width: 830px;
+        margin: auto;
+        color: #ffffff;
+        margin-top: 87px;
+        margin-bottom: 107px;
+        font-size: 20px;
+    }
+    form {
+        margin: 0;
+    }
+    .searchBarConatiner {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        background-color: #212121;
+    }
+    .header {
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        background-color: #212121;
+        margin: 0;
+        padding: 25px;
+        color: #B4B4B4;
+    }
+    @media screen and (max-width: 845px) {
+        .searchBarInput {
+            width: calc(100vw - 148px);
+            max-width: 700px;
+        }
+        .translations {
+            width: calc(100vw - 20px);
+            max-width: 830px;
+        }
+    }
+</style>
+
+<h1 class="header">English to Spanish Translator </h1>
+<div class="translations">
+    {% for item in conversation %}
+    <div class="oneTranslation">
+        <p><strong>{{ item.0 }}:</strong> {{ item.1 }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="searchBarConatiner">
+    <div class="searchBar">
+        <form method="post">
+            {% csrf_token %}
+            <div class="searchBarLeft">
+                <input class="searchBarInput" type="text" name="user_input" id="user_input" placeholder="Type here" autocomplete="off">
+                <button class="searchBarButton" type="submit">
+                    <img src="{% static 'images/send.svg' %}" alt="Send Message">
+                </button>
+            </div>
+        </form>
+        <form method="post" action="{% url 'clearChat' %}">
+            {% csrf_token %}
+            <button class="searchBarButton" type="submit">
+                <img src="{% static 'images/trash.svg' %}" alt="Delete Messages">
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    window.onload = function() {
+        window.scrollTo(0, document.body.scrollHeight);
+    };
+</script>
+{% endblock content %}
